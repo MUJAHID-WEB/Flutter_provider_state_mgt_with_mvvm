@@ -2,8 +2,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../provider/auth_provider.dart';
+import 'dark_theme.dart';
 
 //eve.holt@reqres.in
 //cityslicko
@@ -49,8 +51,16 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             SizedBox(height: 40,),
             GestureDetector(
-              onTap: (){
+              //
+              onTap: ()async {
+                SharedPreferences pref = await SharedPreferences.getInstance();
+                //await pref.setBool('isLoggedIn', true);
+                await pref.setString('email', emailController.text);
+                //
                 authProvider.login(emailController.text.toString(), passwordController.text.toString());
+                //
+                Navigator.push(context, MaterialPageRoute(builder: ((context) => DarkTheme())));
+
               },
               child: Container(
                 height: 50,

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'provider_sm/provider/auth_provider.dart';
 import 'provider_sm/provider/ps1_provider.dart';
 import 'provider_sm/provider/ps2_provider.dart';
 import 'provider_sm/provider/ps3_provider.dart';
 import 'provider_sm/provider/theme_changer_provider.dart';
+
 import 'provider_sm/screen/auth_screen.dart';
+import 'provider_sm/screen/dark_theme.dart';
 
 
 
@@ -14,8 +17,33 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  //
+  bool isLoggedIn = false;
+
+  initSharedPrefs() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+   //
+   //preferences.remove('isLoggedIn');
+   //
+   isLoggedIn = preferences.getBool('isLoggedIn') ?? false;
+    setState(() {
+      
+    });
+  }
+
+  @override
+  void initState() {
+    initSharedPrefs();
+    super.initState();
+  }
 
   // This widget is the root of your application.
   @override
@@ -46,7 +74,7 @@ class MyApp extends StatelessWidget {
         darkTheme: ThemeData(
           brightness: Brightness.dark
         ),
-        home: const LoginScreen(),
+        home: isLoggedIn ? DarkTheme() : LoginScreen(),
     );
      }));
      
