@@ -26,7 +26,7 @@ class NetworkApiService extends BaseApiServices {
 
     return responseJson;  
 
-  }
+  } 
 
 
   @override

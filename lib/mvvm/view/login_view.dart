@@ -17,7 +17,7 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
 
-  ValueNotifier<bool> _obsecurePassword = ValueNotifier<bool>(true);
+  ValueNotifier<bool> _obsecurePassword = ValueNotifier<bool>(true); //show password char on click
 
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -65,11 +65,11 @@ class _LoginViewState extends State<LoginView> {
                 labelText: 'Email',
                 prefixIcon: Icon(Icons.alternate_email)
               ),
-              onFieldSubmitted: (valu){
+              onFieldSubmitted: (valu){ // jump to next
                 Utils.fieldFocusChange(context, emailFocusNode, passwordFocusNode); // from utils
               },
             ),
-            ValueListenableBuilder( 
+            ValueListenableBuilder( //show password char on click
                 valueListenable: _obsecurePassword,
                 builder: (context , value, child){
                   return TextFormField(
@@ -109,7 +109,7 @@ class _LoginViewState extends State<LoginView> {
                 }else if(_passwordController.text.length < 6){
                   Utils.flushBarErrorMessage('Please enter 6 digit password', context);
 
-                }else {
+                }else {  
 
                   Map data = {
                     'email' : _emailController.text.toString(),

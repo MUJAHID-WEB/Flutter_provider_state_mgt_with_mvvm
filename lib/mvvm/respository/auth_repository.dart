@@ -12,7 +12,7 @@ class AuthRepository  {
   BaseApiServices _apiServices = NetworkApiService() ;
 
 
-  Future<dynamic> loginApi(dynamic data )async{ 
+  Future<dynamic> loginApiRepo(dynamic data )async{ 
 
     try{
 

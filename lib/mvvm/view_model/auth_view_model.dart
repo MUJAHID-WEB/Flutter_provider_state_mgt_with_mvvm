@@ -11,9 +11,9 @@ import '../utils/routes/routes_name.dart';
 import '../utils/utils.dart';
 import 'user_view_model.dart';
 
-class AuthViewModel with ChangeNotifier {
+class AuthViewModel with ChangeNotifier {   
 
-  final _myRepo = AuthRepository();
+  final _myRepo = AuthRepository(); //repo connect
 
   bool _loading = false ;
   bool get loading => _loading ;
@@ -32,23 +32,24 @@ class AuthViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> loginApi(dynamic data , BuildContext context) async {
+  Future<void> loginApi(dynamic data , BuildContext context) async { 
 
     setLoading(true);
 
-    _myRepo.loginApi(data).then((value){
+    _myRepo.loginApiRepo(data).then((value){ //repo connect
       setLoading(false);
       //
       final userPreference = Provider.of<UserViewModel>(context , listen: false);
       userPreference.saveUser(
-        UserModel(
+        UserModel( 
           token: value['token'].toString()
         )
       );
       //
       Utils.flushBarErrorMessage('Login Successfully', context);
       //
-      Navigator.pushNamed(context, RoutesName.home);
+      Navigator.pushNamed(context, RoutesName.home); // go to home
+      //
       if(kDebugMode){
         print(value.toString());
 
