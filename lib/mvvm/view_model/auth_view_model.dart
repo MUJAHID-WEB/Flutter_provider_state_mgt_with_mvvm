@@ -36,7 +36,7 @@ class AuthViewModel with ChangeNotifier {
 
     setLoading(true);
 
-    _myRepo.loginApiRepo(data).then((value){ //repo connect
+    _myRepo.loginApiRepo(data).then((value){ //repo connect with
       setLoading(false);
       //
       final userPreference = Provider.of<UserViewModel>(context , listen: false);
